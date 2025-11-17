@@ -23,3 +23,5 @@
     # aerospace related
     ~/.config/aerospace: home/config/aerospace
     ~/.config/sketchybar: home/config/sketchybar
+    # applications
+    ~/.hammerspoon: home/applications/hammerspoon
