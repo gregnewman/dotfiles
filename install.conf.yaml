@@ -7,9 +7,13 @@
 
 - link:
     # Shell stuff
-    ~/.zshrc: home/.zshrc
-    ~/.tmux.conf: home/.tmux.conf
-    ~/.npmrc: home/.npmrc
-    ~/.direnvrc: home/.direnvrc
     ~/.bashrc: home/.bashrc
+    ~/.direnvrc: home/.direnvrc
     ~/justfile: home/justfile
+    ~/.npmrc: home/.npmrc
+    ~/.tmux.conf: home/.tmux.conf
+    ~/.zshrc: home/.zshrc
+    # git
+    ~/.config/git: home/config/git
+    # starship
+    ~/.config/starship.toml: home/config/starship.toml
