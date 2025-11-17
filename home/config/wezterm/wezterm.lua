@@ -16,7 +16,8 @@ config.scrollback_lines = 10000
 -- Find them here: https://wezfurlong.org/wezterm/colorschemes/index.html
 config.color_scheme = 'Dracula (Official)'
 -- config.color_scheme = 'Solarized'
-config.window_background_opacity = 1.0
+config.window_background_opacity = 0.9
+config.macos_window_background_blur = 30
 config.inactive_pane_hsb = {
   saturation = 0.5,
   brightness = 0.6,
@@ -47,7 +48,7 @@ local function segments_for_right_status(window)
   return {
     window:active_workspace(),
     wezterm.strftime('%a %b %-d %H:%M'),
-    wezterm.hostname(),
+    wezterm.hostname():match("([^.]+)"),
   }
 end
 
