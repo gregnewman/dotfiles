@@ -20,3 +20,6 @@
     # terminal
     ~/.config/ghostty: home/config/ghostty
     ~/.config/wezterm: home/config/wezterm
+    # aerospace related
+    ~/.config/aerospace: home/config/aerospace
+    ~/.config/sketchybar: home/config/sketchybar
