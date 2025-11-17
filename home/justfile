@@ -1,0 +1,16 @@
+@_default:
+    just --list
+
+# cleanup homebrew
+@cleanup:
+	brew cleanup --prune=0
+
+# Update homebrew
+@homebrew-update:
+    brew update
+
+# upgrade homebrew then run cleanup
+@homebrew-upgrade:
+    brew outdated
+    brew upgrade || true
+    just cleanup

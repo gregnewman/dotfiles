@@ -8,3 +8,8 @@
 - link:
     # Shell stuff
     ~/.zshrc: home/.zshrc
+    ~/.tmux.conf: home/.tmux.conf
+    ~/.npmrc: home/.npmrc
+    ~/.direnvrc: home/.direnvrc
+    ~/.bashrc: home/.bashrc
+    ~/justfile: home/justfile
