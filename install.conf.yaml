@@ -17,3 +17,6 @@
     ~/.config/git: home/config/git
     # starship
     ~/.config/starship.toml: home/config/starship.toml
+    # terminal
+    ~/.config/ghostty: home/config/ghostty
+    ~/.config/wezterm: home/config/wezterm
