@@ -1,5 +1,7 @@
 -- Import the wezterm module
 local wezterm = require 'wezterm'
+-- ressurct plugin
+local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 -- Creates a config object which we will be adding our config to
 local config = wezterm.config_builder()
 
@@ -7,16 +9,16 @@ local config = wezterm.config_builder()
 config.enable_tab_bar = true
 config.use_fancy_tab_bar = true
 config.audible_bell = "Disabled"
-config.tab_max_width = 100
+config.tab_max_width = 200
 
 -- How many lines of scrollback you want to retain per tab
-config.scrollback_lines = 10000
+config.scrollback_lines = 50000
 
 -- Theme
 -- Find them here: https://wezfurlong.org/wezterm/colorschemes/index.html
 config.color_scheme = 'Dracula (Official)'
 -- config.color_scheme = 'Solarized'
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.5
 config.macos_window_background_blur = 30
 config.inactive_pane_hsb = {
   saturation = 0.5,
@@ -36,6 +38,26 @@ config.window_padding = {
   right = '8',
   top = '0cell',
   bottom = '0cell',
+}
+config.window_frame = {
+  inactive_titlebar_bg = '#353535',
+  active_titlebar_bg = '#2b2042',
+  inactive_titlebar_fg = '#cccccc',
+  active_titlebar_fg = '#ffffff',
+  inactive_titlebar_border_bottom = '#353535',
+  active_titlebar_border_bottom = '#353535',
+  button_fg = '#cccccc',
+  button_bg = '#353535',
+  button_hover_fg = '#ffffff',
+  button_hover_bg = '#3b3052',
+  border_left_width = '0.25cell',
+  border_right_width = '0.25cell',
+  border_bottom_height = '0.25cell',
+  border_top_height = '0.25cell',
+  border_left_color = '#353535',
+  border_right_color = '#353535',
+  border_bottom_color = '#353535',
+  border_top_color = '#353535',
 }
 
 -- Fonts
@@ -101,6 +123,38 @@ wezterm.on('update-status', function(window, _)
 
   window:set_right_status(wezterm.format(elements))
 end)
+
+-- Enable periodic saving (saves every 15 minutes by default)
+resurrect.state_manager.periodic_save()
+
+-- Auto-restore on startup
+wezterm.on("gui-startup", resurrect.state_manager.resurrect_on_gui_startup)
+
+-- Add keybindings for save/load
+config.keys = {
+  -- Save current session
+  {
+    key = 'S',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action_callback(function(window, pane)
+      resurrect.save_state(resurrect.workspace_state.get_workspace_state())
+    end),
+  },
+  -- Load/restore session
+  {
+    key = 'R',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action_callback(function(window, pane)
+      resurrect.fuzzy_load(window, pane, function(id)
+        resurrect.workspace_state.restore_workspace(resurrect.load_state(id, "workspace"), {
+          window = window,
+          relative = true,
+          restore_text = true,
+        })
+      end)
+    end),
+  },
+}
 
 -- Returns our config to be evaluated. We must always do this at the bottom of this file
 return config
