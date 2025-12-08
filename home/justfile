@@ -16,7 +16,6 @@
     just cleanup
 
 # Auto-commit and push org files on change
-# Auto-commit and push org files on change
 watch-org:
     #!/bin/bash
     cd /users/Greg/Org
