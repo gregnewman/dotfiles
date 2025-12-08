@@ -14,3 +14,20 @@
     brew outdated
     brew upgrade || true
     just cleanup
+
+# Auto-commit and push org files on change
+# Auto-commit and push org files on change
+watch-org:
+    #!/bin/bash
+    cd /users/Greg/Org
+    /opt/homebrew/bin/fswatch -0 --recursive \
+        --exclude '\.git/' \
+        --exclude '\.swp$' \
+        --exclude '~$' \
+        . | while read -d "" event; do
+        git add -A
+        if ! git diff-index --quiet HEAD 2>/dev/null; then
+            git commit -m "Auto-commit: $(date '+%Y-%m-%d %H:%M:%S')"
+            git push origin main
+        fi
+    done
