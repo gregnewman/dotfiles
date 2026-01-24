@@ -46,3 +46,6 @@
     untracked = cyan
 [init]
 	defaultBranch = main
+[user]
+	name = Greg Newman
+	email = greg@gregnewman.or

@@ -15,6 +15,10 @@
     brew upgrade || true
     just cleanup
 
+# upgrade ty
+@ty-upgrade:
+    uv tool upgrade ty
+
 # Auto-commit and push org files on change
 watch-org:
     #!/bin/bash
