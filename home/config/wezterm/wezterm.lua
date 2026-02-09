@@ -124,29 +124,29 @@ wezterm.on('update-status', function(window, _)
   window:set_right_status(wezterm.format(elements))
 end)
 
--- Enable periodic saving (saves every 15 minutes by default)
-resurrect.state_manager.periodic_save()
+-- Enable periodic saving (saves every 60 seconds)
+resurrect.state_manager.periodic_save({
+  interval_seconds = 60,
+  save_workspaces = true,
+  save_windows = true,
+  save_tabs = true,
+})
 
--- Save on quit so session is always fresh
+-- Save on various events to ensure we always capture latest state
 wezterm.on("window-close", function(window, pane)
+  wezterm.log_info("WINDOW-CLOSE EVENT - Saving state")
   resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
 end)
 
--- Auto-restore on startup
-wezterm.on("gui-startup", function(cmd)
-  wezterm.log_info("GUI-STARTUP EVENT FIRED!")
-  local state = resurrect.state_manager.load_state("default", "workspace")
-  if state then
-    wezterm.log_info("Found saved state, restoring...")
-    resurrect.workspace_state.restore_workspace(state, {
-      relative = true,
-      restore_text = true,
-      on_pane_restore = resurrect.tab_state.default_on_pane_restore,
-    })
-  else
-    wezterm.log_info("No saved state found")
+-- Save when focus is lost (before switching away)
+wezterm.on("window-focus-changed", function(window, pane)
+  if not window:is_focused() then
+    wezterm.log_info("FOCUS-LOST EVENT - Saving state")
+    resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
   end
 end)
+
+-- Auto-restore removed - use CTRL+SHIFT+R to manually restore when you launch
 
 -- Add keybindings for save/load
 config.keys = {
