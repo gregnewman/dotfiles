@@ -18,7 +18,7 @@ config.scrollback_lines = 50000
 -- Find them here: https://wezfurlong.org/wezterm/colorschemes/index.html
 config.color_scheme = 'Dracula (Official)'
 -- config.color_scheme = 'Solarized'
-config.window_background_opacity = 0.5
+config.window_background_opacity = 0.8
 config.macos_window_background_blur = 30
 config.inactive_pane_hsb = {
   saturation = 0.5,
@@ -34,8 +34,8 @@ config.colors = {
   }
 }
 config.window_padding = {
-  left = '8',
-  right = '8',
+  left = '12',
+  right = '12',
   top = '0cell',
   bottom = '0cell',
 }
@@ -127,30 +127,72 @@ end)
 -- Enable periodic saving (saves every 15 minutes by default)
 resurrect.state_manager.periodic_save()
 
+-- Save on quit so session is always fresh
+wezterm.on("window-close", function(window, pane)
+  resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
+end)
+
 -- Auto-restore on startup
-wezterm.on("gui-startup", resurrect.state_manager.resurrect_on_gui_startup)
+wezterm.on("gui-startup", function(cmd)
+  wezterm.log_info("GUI-STARTUP EVENT FIRED!")
+  local state = resurrect.state_manager.load_state("default", "workspace")
+  if state then
+    wezterm.log_info("Found saved state, restoring...")
+    resurrect.workspace_state.restore_workspace(state, {
+      relative = true,
+      restore_text = true,
+      on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+    })
+  else
+    wezterm.log_info("No saved state found")
+  end
+end)
 
 -- Add keybindings for save/load
 config.keys = {
+  -- Move tabs left/right
+  {
+    key = '{',
+    mods = 'SHIFT|ALT',
+    action = wezterm.action.MoveTabRelative(-1),
+  },
+  {
+    key = '}',
+    mods = 'SHIFT|ALT',
+    action = wezterm.action.MoveTabRelative(1),
+  },
   -- Save current session
   {
     key = 'S',
     mods = 'CTRL|SHIFT',
     action = wezterm.action_callback(function(window, pane)
-      resurrect.save_state(resurrect.workspace_state.get_workspace_state())
+      resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
     end),
   },
   -- Load/restore session
   {
     key = 'R',
     mods = 'CTRL|SHIFT',
-    action = wezterm.action_callback(function(window, pane)
-      resurrect.fuzzy_load(window, pane, function(id)
-        resurrect.workspace_state.restore_workspace(resurrect.load_state(id, "workspace"), {
-          window = window,
+    action = wezterm.action_callback(function(win, pane)
+      resurrect.fuzzy_loader.fuzzy_load(win, pane, function(id, label)
+        local type = string.match(id, "^([^/]+)")
+        id = string.match(id, "([^/]+)$")
+        id = string.match(id, "(.+)%..+$")
+        local opts = {
           relative = true,
           restore_text = true,
-        })
+          on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+        }
+        if type == "workspace" then
+          local state = resurrect.state_manager.load_state(id, "workspace")
+          resurrect.workspace_state.restore_workspace(state, opts)
+        elseif type == "window" then
+          local state = resurrect.state_manager.load_state(id, "window")
+          resurrect.window_state.restore_window(pane:window(), state, opts)
+        elseif type == "tab" then
+          local state = resurrect.state_manager.load_state(id, "tab")
+          resurrect.tab_state.restore_tab(pane:tab(), state, opts)
+        end
       end)
     end),
   },
