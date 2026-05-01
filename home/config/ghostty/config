@@ -6,7 +6,7 @@
 # Additionally, each config option is also explained in detail
 # on Ghostty's website, at https://ghostty.org/docs/config.
 
-font-family = Fira Code # JetBrainsMono Nerd Font Mono
+font-family = Maple Mono NF # Fira Code # JetBrainsMono Nerd Font Mono
 font-size = 13
 background-opacity = 0.8
 background-blur = 30
@@ -40,7 +40,7 @@ keybind = alt+down=goto_split:bottom
 
 # split management
 # maximize current split
-keybind = ctrl+shift+z=toggle_split_zoom
+keybind = ctrl+shift+f=toggle_split_zoom
 # balance split sizes
 keybind = ctrl+shift+equal=equalize_splits
 
