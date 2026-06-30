@@ -1,0 +1,59 @@
+# Focus window
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east
+
+# Move window (warp = swap in BSP tree)
+alt + shift - h : yabai -m window --warp west
+alt + shift - j : yabai -m window --warp south
+alt + shift - k : yabai -m window --warp north
+alt + shift - l : yabai -m window --warp east
+
+# Toggle split direction
+alt - 0x18 : yabai -m window --toggle split
+
+# Toggle zoom-fullscreen
+alt + shift - f : yabai -m window --toggle zoom-fullscreen
+
+# Float / unfloat
+alt + shift - space : yabai -m window --toggle float
+
+# Resize
+alt + shift - 0x1B : yabai -m window --resize right:-50:0
+alt + shift - 0x18 : yabai -m window --resize right:50:0
+
+# Focus space — maps alt-0 → space 10, alt-o → space 11
+alt - 1 : yabai -m space --focus 1
+alt - 2 : yabai -m space --focus 2
+alt - 3 : yabai -m space --focus 3
+alt - 4 : yabai -m space --focus 4
+alt - 5 : yabai -m space --focus 5
+alt - 6 : yabai -m space --focus 6
+alt - 7 : yabai -m space --focus 7
+alt - 8 : yabai -m space --focus 8
+alt - 9 : yabai -m space --focus 12
+alt - 0 : yabai -m space --focus 10
+alt - o : yabai -m space --focus 11
+
+# Move window to space (and follow it)
+alt + shift - 1 : yabai -m window --space 1 && yabai -m space --focus 1
+alt + shift - 2 : yabai -m window --space 2 && yabai -m space --focus 2
+alt + shift - 3 : yabai -m window --space 3 && yabai -m space --focus 3
+alt + shift - 4 : yabai -m window --space 4 && yabai -m space --focus 4
+alt + shift - 5 : yabai -m window --space 5 && yabai -m space --focus 5
+alt + shift - 6 : yabai -m window --space 6 && yabai -m space --focus 6
+alt + shift - 7 : yabai -m window --space 7 && yabai -m space --focus 7
+alt + shift - 8 : yabai -m window --space 8 && yabai -m space --focus 8
+alt + shift - 9 : yabai -m window --space 12 && yabai -m space --focus 12
+alt + shift - 0 : yabai -m window --space 10 && yabai -m space --focus 10
+alt + shift - o : yabai -m window --space 11 && yabai -m space --focus 11
+
+# Toggle tiling on current space
+alt - d : yabai -m space --layout $(yabai -m query --spaces --space | python3 -c "import sys,json; s=json.load(sys.stdin); print('float' if s['type']=='bsp' else 'bsp')")
+
+# Switch between last two spaces
+alt - tab : yabai -m space --focus recent
+
+# Move window to next/prev display
+alt + shift - tab : yabai -m window --display next

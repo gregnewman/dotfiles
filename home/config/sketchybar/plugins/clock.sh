@@ -4,5 +4,7 @@
 # the item invoking this script:
 # https://felixkratz.github.io/SketchyBar/config/events#events-and-scripting
 
-sketchybar --set "$NAME" label="$(date '+%d/%m %H:%M')"
+LOCAL=$(date '+%a %b %e %H:%M')
+UTC=$(date -u '+%H:%M UTC')
+sketchybar --set "$NAME" label="$LOCAL  $UTC"
 
