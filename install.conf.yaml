@@ -23,5 +23,10 @@
     # aerospace related
     ~/.config/aerospace: home/config/aerospace
     ~/.config/sketchybar: home/config/sketchybar
+    # window management
+    ~/.config/borders: home/config/borders
+    ~/.config/skhd: home/config/skhd
+    # herdr
+    ~/.config/herdr/config.toml: home/config/herdr/config.toml
     # applications
     ~/.hammerspoon: home/applications/hammerspoon

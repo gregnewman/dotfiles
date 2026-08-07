@@ -1,0 +1,18 @@
+onboarding = false
+
+[keys]
+prefix = "ctrl+space"
+
+[theme]
+name = "tokyo-night"
+auto_switch = false
+
+[ui]
+agent_panel_sort = "spaces"
+mouse_capture = true
+
+[ui.sidebar.spaces]
+row_gap = 1
+
+[ui.sidebar.agents]
+row_gap = 1

@@ -50,7 +50,7 @@ for i in "${!WORKSPACE_IDS[@]}"; do
                background.drawing=off \
                label.drawing=off \
                script="$PLUGIN_DIR/aerospace_workspace.sh" \
-               click_script="/opt/homebrew/bin/aerospace workspace $ws" \
+               click_script="/opt/homebrew/bin/aerospace workspace $ws && /opt/homebrew/bin/aerospace focus --dfs-index 1 2>/dev/null; true" \
              --subscribe "ws.$ws" aerospace_workspace_change
 done
 

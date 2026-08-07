@@ -38,8 +38,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
-export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
+export EMACS_SOCKET_NAME="/tmp/emacs$(id -u)/server"
+export EDITOR="emacsclient -t -a 'emacs -nw'"   # $EDITOR opens in terminal, falls back to emacs -nw
+export VISUAL="emacsclient -a emacs"            # $VISUAL opens in existing Emacs frame, falls back to new emacs
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
