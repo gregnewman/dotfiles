@@ -21,17 +21,18 @@ sketchybar --default "${default[@]}"
 ##### AeroSpace Workspace Indicators #####
 sketchybar --add event aerospace_workspace_change
 
-WORKSPACE_IDS=(1 2 3 4 5 6 7 8 9 O)
+WORKSPACE_IDS=(1 2 3 4 5 6 7 8 9 0 O)
 WORKSPACE_ICONS=(
   ":reeder5:"      # 1: Reeder/Ivory
   ":toggl_track:"  # 2: Toggl/Tower
-  ":emacs:"        # 3: Emacs/cmux
-  ":safari:"       # 4: Safari
-  ":drafts:"       # 5: Drafts/Obsidian
-  ":calendar:"     # 6: Fantastical/OmniFocus/Things
-  ":mail:"         # 7: MailMate
-  ":slack:"        # 8: Messages/Slack
-  ":vivaldi:"      # 9: Vivaldi
+  ":wezterm:"      # 3: WezTerm
+  ":emacs:"        # 4: Emacs
+  ":safari:"       # 5: Safari
+  ":drafts:"       # 6: Drafts/Obsidian
+  ":calendar:"     # 7: Fantastical/OmniFocus/Things
+  ":mail:"         # 8: MailMate
+  ":slack:"        # 9: Messages/Slack
+  ":vivaldi:"      # 0: Vivaldi
   ":orbstack:"     # O: OrbStack/Linear
 )
 
