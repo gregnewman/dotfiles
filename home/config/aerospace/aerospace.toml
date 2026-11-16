@@ -87,8 +87,8 @@ outer.right =      5
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 # All bindings use cmd-ctrl so alt stays free for Emacs Meta and the terminal
-cmd-ctrl-equal = 'layout tiles horizontal vertical'
-cmd-ctrl-backslash = 'layout accordion horizontal vertical'
+cmd-ctrl-semicolon = 'layout tiles accordion'      # toggle tiles <-> accordion
+cmd-ctrl-equal = 'layout horizontal vertical'      # flip orientation
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 cmd-ctrl-h = 'focus left'
