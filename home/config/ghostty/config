@@ -8,7 +8,7 @@
 
 font-family = Maple Mono NF # Fira Code # JetBrainsMono Nerd Font Mono
 font-size = 13
-background-opacity = 0.8
+background-opacity = 0.9
 background-blur = 30
 theme = Dracula
 scrollback-limit = 10000000
