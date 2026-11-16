@@ -25,7 +25,6 @@
     ~/.config/sketchybar: home/config/sketchybar
     # window management
     ~/.config/borders: home/config/borders
-    ~/.config/skhd: home/config/skhd
     # herdr
     ~/.config/herdr/config.toml: home/config/herdr/config.toml
     # applications
