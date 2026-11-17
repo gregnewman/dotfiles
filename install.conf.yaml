@@ -25,6 +25,8 @@
     ~/.config/sketchybar: home/config/sketchybar
     # window management
     ~/.config/borders: home/config/borders
+    ~/.config/omniwm/settings.toml: home/config/omniwm/settings.toml
+    ~/.config/omniwm/shell/default/shell.toml: home/config/omniwm/shell/default/shell.toml
     # herdr
     ~/.config/herdr/config.toml: home/config/herdr/config.toml
     # applications
